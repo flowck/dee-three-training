@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Histogram</title>
+</head>
+<body>
+
+  <!-- ### Area ### -->
+  <section class="plot"></section>
+  <!-- ### Area ### -->
+
+  <script src="../node_modules/d3/dist/d3.min.js"></script>
+  <script>
+    /**
+     * Histogram
+     * Author: Firmino Changani
+    */
+
+    // Data
+    const data = [
+      { label: "Angola", value: 20 },
+      { label: "Brazil", value: 34 },
+      { label: "Portugal", value: 25 },
+      { label: "Mozambique", value: 15 },
+      { label: "Guine-Bissau", value: 30 },
+      { label: "Cape-Verde", value: 23 },
+      { label: "São Tomé", value: 43 }
+    ];
+    const maxValueInDataset = Math.max(...data.map(item => item.value));
+
+    // Select the plot
+    const _plot = d3.select(".plot");
+
+    // Create the svg
+    const _plotSizes = { width: 600, height: 200 };
+    const _plotMargins = {left: 20, bottom: 20, top: 20, right: 20};
+    _plot
+      .append("svg")
+      .attr("width", _plotSizes.width)
+      .attr("height", _plotSizes.height)
+      .append("g");
+
+    const x = d3.scaleLinear();
+    x.domain([0, maxValueInDataset])
+      .range([0, _plotSizes.width]);
+
+    // Load the data
+    const rectWidth = 80;
+    const svg = _plot.select("g");
+    const _rects = svg.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+        .attr("width", rectWidth)
+        .attr("height", d => d.value)
+        .attr("x", (d, i) => rectWidth * i)
+        .attr("y", 0)
+        .attr("fill", "red")
+        .attr("stroke", "blue")
+
+    svg
+      .append("g")
+        .selectAll("text")
+        .data(data)
+        .enter()
+        .append("text")
+          .attr("x", (d, i) => rectWidth * i)
+          .attr("y", d => d.value)
+          .attr("fill", "white")
+          .attr("font-size", "10px")
+          .text(d => `${d.label}: ${d.value}`)
+    
+  </script>
+</body>
+</html>
