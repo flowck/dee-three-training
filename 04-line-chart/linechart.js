@@ -56,6 +56,6 @@ chart
   .enter()
   .append("circle")
     .attr("cx", (d, i) => xScale(i))
-    .attr("cy", d => yScale(d))
+    .attr("cy", d => console.log(x))
     .attr("r", 4)
     .attr("fill", "red");
