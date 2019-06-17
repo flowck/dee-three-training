@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Axes</title>
+</head>
+<body>
+
+  <!-- Plot -->
+  <div id="plot"></div>
+
+  <!-- Scripts -->
+  <script src="../node_modules/d3/dist/d3.min.js"></script>
+  <script>
+    const data = [20, 39, 29, 38, 84];
+    // Configurations
+    const plotWidth = 400;
+    const plotHeight = 200;
+    const maxValue = 500;
+    const plot = d3.select("#plot").append("svg")
+      .attr("width", plotWidth)
+      .attr("height", plotHeight);
+
+    const x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
+    const xAxis = d3.axisBottom(x);
+    const y = d3.scaleLinear().domain([0, 100]).range([0, plotHeight]);
+    const yAxis = d3.axisLeft(y);
+
+    // Create the svg
+    const svg = plot;
+
+    svg
+      .append("g")
+        .attr("transform", `translate(10, ${plotHeight  - 20})`)
+        .call(xAxis);
+
+    svg
+      .append("g")
+        .attr("transform", `translate(10, -20)`)
+        .call(yAxis);
+
+
+    console.log(x(10));
+
+  </script>
+</body>
+</html>
