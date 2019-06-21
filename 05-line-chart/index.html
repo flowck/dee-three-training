@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05 Line chart</title>
+</head>
+<body>
+  <div id="chart"></div>
+  <script src="../node_modules/d3/dist/d3.min.js"></script>
+  <script>
+    const margin = {
+      left: 10,
+      right: 10,
+      top: 10,
+      bottom: 10
+    };
+    const width = 500 - margin.left - margin.right;
+    const height = 200 - margin.top - margin.bottom;
+
+    // Construct the svg
+    const plot = d3.select("#chart")
+    const svg = plot.append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Axes
+    const xScale = d3.scaleLinear();
+    xScale.domain([0, width]).range([0, 100]);
+
+    const yScale = d3.scaleLinear();
+    yScale.domain([0, ])
+  </script>
+</body>
+</html>
