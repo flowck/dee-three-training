@@ -22,14 +22,14 @@ const yScale = d3.scaleLinear()
 
 // Render grids
 const xGrid = () => {
-  return d3.axisBottom(xScale)
+  return d3.scaleLinear(xScale)
     .ticks(5)
     .tickSize(-height)
     .tickFormat("");
 }
 
 const yGrid = () => {
-  return d3.axisLeft(yScale)
+  return d3.scaleLinear(yScale)
     .ticks(5)
     .tickSize(-width)
     .tickFormat("");

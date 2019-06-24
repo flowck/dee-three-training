@@ -20,15 +20,6 @@ async function main() {
     .domain(d3.extent(data, d => d.value))
     .range([0, width]);
 
-  const histogram = d3.histogram()
-    .value(d => d.value)
-    .domain(xScale.domain())
-    .thresholds(xScale.ticks(2));
-
-  const values = histogram(data);
-
-  log(values);
-
   // y scale
   const yScale = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.value)])
@@ -47,6 +38,8 @@ async function main() {
       .tickFormat("");
   };
 
+  log(yScale(2000))
+
   svg.append("g")
     .attr("class", "grid")
     .attr("transform", `translate(0, 0)`)
@@ -55,13 +48,14 @@ async function main() {
   // Render data
   const rectWidth = 20;
   svg.selectAll("rect")
-    .data(values)
+    .data(data)
     .enter()
     .append("rect")
-      .attr("transform", d => `translate(${xScale(d.x0)}, ${yScale(d.length)})`)
-      .attr("width", (d, i) => xScale(d.x1) - xScale(d.x0) - 1)
-      .attr("height", d => height - yScale(d.length))
+      .attr("rx", 2.5)
       .attr("x", 1)
+      .attr("y", d => d.value)
+      .attr("width", d => xScale(d.value) - xScale(0))
+      .attr("height", d => yScale(d.value))
       .attr("class", "rect");
 }
 main();
